@@ -17,7 +17,7 @@ import com.example.whatsappresponse.view.ui.AddKeyword;
 
 import java.util.List;
 
-public class AddMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AddMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
     private Context context;
     private List<MultiView> multiViewsList;
 
@@ -74,21 +74,13 @@ public class AddMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 break;
             case 1:
                 ViewHolderReplyAdd viewHolderReplyAdd = (ViewHolderReplyAdd) viewHolder;
-                viewHolderReplyAdd.imageViewReplyAdd.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ((AddKeyword)context).addReplyMessage();
-                    }
-                });
+                viewHolderReplyAdd.imageViewReplyAdd.setTag(position);
+                viewHolderReplyAdd.imageViewReplyAdd.setOnClickListener(this);
                 break;
             case 2:
                 ViewHolderReplyDelete viewHolderReplyDelete = (ViewHolderReplyDelete) viewHolder;
-                viewHolderReplyDelete.imageViewReplyDelete.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ((AddKeyword)context).deleteReplyMessage(position);
-                    }
-                });
+                viewHolderReplyDelete.imageViewReplyDelete.setTag(position);
+                viewHolderReplyDelete.imageViewReplyDelete.setOnClickListener(this);
                 break;
         }
     }
@@ -96,6 +88,24 @@ public class AddMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public int getItemCount() {
         return multiViewsList.size();
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        int position = Integer.parseInt(String.valueOf(v.getTag()));
+        switch (v.getId()){
+            case R.id.addReplyIcon:
+                ((AddKeyword)context).addReplyMessage();
+                break;
+
+            case R.id.deleteIcon:
+                ((AddKeyword)context).deleteReplyMessage(position);
+                break;
+        }
+
+
+
     }
 
 
