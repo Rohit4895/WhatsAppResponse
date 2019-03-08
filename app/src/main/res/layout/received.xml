@@ -9,24 +9,22 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="@dimen/cardViewMarginStart"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
-            android:paddingBottom="5dp">
+            android:layout_marginBottom="@dimen/constraintMarginBottom"
+            android:paddingBottom="@dimen/constraintPaddingBottom">
 
             <TextView
                 android:id="@+id/receiveTextView"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="15dp"
-                android:layout_weight="1"
+                android:layout_height="@dimen/receiveTextViewHeight"
+                android:layout_marginLeft="@dimen/receiveTextViewMarginLeft"
                 android:gravity="bottom"
                 android:text="Received message"
                 android:textAlignment="gravity"
@@ -36,13 +34,24 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/addReplyIcon"
+                android:layout_width="@dimen/addReplyIconWidth"
+                android:layout_height="@dimen/addReplyIconHeight"
+                android:layout_marginTop="@dimen/addReplyIconMarginTop"
+                android:padding="@dimen/addReplyIconPadding"
+                android:src="@drawable/plus"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
             <View
                 android:id="@+id/receiveView"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="8dp"
+                android:layout_height="@dimen/receiveViewHeight"
+                android:layout_marginLeft="@dimen/receiveViewMarginLeft"
+                android:layout_marginTop="@dimen/receiveViewMarginTop"
+                android:layout_marginRight="@dimen/receiveViewMarginRight"
                 android:background="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -52,9 +61,9 @@
                 android:id="@+id/receiveEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="@dimen/receiveEditTextMarginLeft"
+                android:layout_marginTop="@dimen/receiveEditTextMarginTop"
+                android:layout_marginRight="@dimen/receiveEditTextMarginRight"
                 android:hint="Type message to match received message"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -9,7 +9,7 @@
         android:id="@+id/cardView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="@dimen/cardView2MarginStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView">
@@ -17,15 +17,14 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
-            android:paddingBottom="5dp">
+            android:layout_marginBottom="@dimen/constraintReplyAddMarginBottom"
+            android:paddingBottom="@dimen/constraintReplyAddPaddingBottom">
 
             <TextView
                 android:id="@+id/replyTextView"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginStart="15dp"
-                android:layout_weight="1"
+                android:layout_height="@dimen/replyTextViewHeight"
+                android:layout_marginStart="@dimen/replyTextViewMarginStart"
                 android:gravity="bottom"
                 android:text="Reply message"
                 android:textAlignment="gravity"
@@ -34,36 +33,26 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/addReplyIcon"
-                android:layout_width="58dp"
-                android:layout_height="31dp"
-                android:layout_marginTop="5dp"
-                android:padding="1dp"
-                android:src="@drawable/plus"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <View
                 android:id="@+id/replyView"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="8dp"
+                android:layout_height="@dimen/replyViewHeight"
+                android:layout_marginLeft="@dimen/replyViewMarginLeft"
+                android:layout_marginTop="@dimen/replyViewMarginTop"
+                android:layout_marginRight="@dimen/replyViewMarginRight"
                 android:background="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/replyTextView" />
 
             <EditText
-                android:id="@+id/replyEditText"
+                android:id="@+id/replyEditTextAdd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="@dimen/replyEditTextAddMarginLeft"
+                android:layout_marginTop="@dimen/replyEditTextAddMarginTop"
+                android:layout_marginRight="@dimen/replyEditTextAddMarginTop"
+                android:layout_marginBottom="@dimen/replyEditTextAddMarginBottom"
                 android:hint="Type reply message to be sent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

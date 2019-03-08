@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -74,12 +75,8 @@ public class MainActivity extends AppCompatActivity implements InterfaceReposito
         deleteAlertDialogue(new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                mainActivityViewModel.deleteMessage(messageId).observe(MainActivity.this, new Observer<Boolean>() {
-                    @Override
-                    public void onChanged(@Nullable Boolean deleteSuccess) {
-                        Toast.makeText(getApplicationContext(),"Message Deleted Successfully...",Toast.LENGTH_SHORT).show();
-                    }
-                });
+                mainActivityViewModel.deleteMessage(messageId);
+                Log.d("roh","deleted");
             }
         });
 

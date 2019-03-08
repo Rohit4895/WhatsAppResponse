@@ -12,15 +12,30 @@ public class MultiView {
         this.enumViewTypes = enumViewTypes;
     }
 
+    public MultiView() {
+    }
+
     public String getMessage() {
         return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public int getId() {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public EnumViewTypes getEnumViewTypes() {
         return enumViewTypes;
+    }
+
+    public void setEnumViewTypes(EnumViewTypes enumViewTypes) {
+        this.enumViewTypes = enumViewTypes;
     }
 }

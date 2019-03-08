@@ -4,26 +4,41 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.whatsappresponse.R;
 import com.example.whatsappresponse.service.model.EnumViewTypes;
 import com.example.whatsappresponse.service.model.MultiView;
+import com.example.whatsappresponse.service.utils.EditTextOnFocused;
+import com.example.whatsappresponse.service.utils.EditTextWatcher;
+import com.example.whatsappresponse.service.utils.InterfaceRepositories;
 import com.example.whatsappresponse.view.ui.AddKeyword;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-public class AddMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
+public class AddMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+        implements View.OnClickListener, InterfaceRepositories.CallBackTextWatcher {
     private Context context;
     private List<MultiView> multiViewsList;
+    private EditTextWatcher editTextWatcher;
+    private EditTextOnFocused editTextOnFocused;
 
     public AddMessageAdapter(Context context, List<MultiView> multiViewsList) {
         this.context = context;
         this.multiViewsList = multiViewsList;
+        this.editTextWatcher = new EditTextWatcher(this);
+        this.editTextOnFocused = new EditTextOnFocused(editTextWatcher);
     }
 
     @NonNull
@@ -68,19 +83,30 @@ public class AddMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int position) {
-        switch (viewHolder.getItemViewType()){
-            case 0:
-                ViewHolderReceived viewHolderReceived = (ViewHolderReceived) viewHolder;
+
+        MultiView multiView = multiViewsList.get(position);
+        switch (EnumViewTypes.values()[viewHolder.getItemViewType()]){
+            case RECEIVED:
+                final ViewHolderReceived viewHolderReceived = (ViewHolderReceived) viewHolder;
+                viewHolderReceived.imageViewReplyAdd.setTag(position);
+                viewHolderReceived.imageViewReplyAdd.setOnClickListener(this);
+                viewHolderReceived.editText.setTag(position);
+                viewHolderReceived.editText.setOnFocusChangeListener(editTextOnFocused);
+                viewHolderReceived.editText.setText(multiView.getMessage());
                 break;
-            case 1:
-                ViewHolderReplyAdd viewHolderReplyAdd = (ViewHolderReplyAdd) viewHolder;
-                viewHolderReplyAdd.imageViewReplyAdd.setTag(position);
-                viewHolderReplyAdd.imageViewReplyAdd.setOnClickListener(this);
+            case REPLYADD:
+                final ViewHolderReplyAdd viewHolderReplyAdd = (ViewHolderReplyAdd) viewHolder;
+                viewHolderReplyAdd.editText.setTag(position);
+                viewHolderReplyAdd.editText.setOnFocusChangeListener(editTextOnFocused);
+                viewHolderReplyAdd.editText.setText(multiView.getMessage());
                 break;
-            case 2:
-                ViewHolderReplyDelete viewHolderReplyDelete = (ViewHolderReplyDelete) viewHolder;
+            case REPLYDELETE:
+                final ViewHolderReplyDelete viewHolderReplyDelete = (ViewHolderReplyDelete) viewHolder;
                 viewHolderReplyDelete.imageViewReplyDelete.setTag(position);
                 viewHolderReplyDelete.imageViewReplyDelete.setOnClickListener(this);
+                viewHolderReplyDelete.editText.setTag(position);
+                viewHolderReplyDelete.editText.setOnFocusChangeListener(editTextOnFocused);
+                viewHolderReplyDelete.editText.setText(multiView.getMessage());
                 break;
         }
     }
@@ -104,36 +130,45 @@ public class AddMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 break;
         }
 
-
-
     }
 
+    @Override
+    public void callback(int position, String message) {
+        MultiView multiView = multiViewsList.get(position);
+        multiView.setMessage(message);
+    }
 
     public static class ViewHolderReceived extends RecyclerView.ViewHolder {
-
+        private ImageView imageViewReplyAdd;
+        private EditText editText;
 
         public ViewHolderReceived(@NonNull View itemView) {
             super(itemView);
+            this.editText = (EditText) itemView.findViewById(R.id.receiveEditText);
+            this.imageViewReplyAdd = (ImageView) itemView.findViewById(R.id.addReplyIcon);
         }
 
     }
 
     public static class ViewHolderReplyAdd extends RecyclerView.ViewHolder {
-        private ImageView imageViewReplyAdd;
+
+        private EditText editText;
 
 
         public ViewHolderReplyAdd(@NonNull View itemView) {
             super(itemView);
-            imageViewReplyAdd = (ImageView) itemView.findViewById(R.id.addReplyIcon);
+            this.editText = (EditText) itemView.findViewById(R.id.replyEditTextAdd);
         }
     }
 
     public static class ViewHolderReplyDelete extends RecyclerView.ViewHolder {
         private ImageView imageViewReplyDelete;
+        private EditText editText;
 
         public ViewHolderReplyDelete(@NonNull View itemView) {
             super(itemView);
-            imageViewReplyDelete = (ImageView)itemView.findViewById(R.id.deleteIcon);
+            this.imageViewReplyDelete = (ImageView)itemView.findViewById(R.id.deleteIcon);
+            this.editText = (EditText) itemView.findViewById(R.id.replyEditTextDelete);
         }
     }
 }

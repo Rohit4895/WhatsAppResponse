@@ -89,6 +89,4 @@
     <dimen name="replyEditTextDeleteMarginRight">10dp</dimen>
     <dimen name="replyEditTextDeleteMarginLeft">15dp</dimen>
     <dimen name="replyEditTextDeleteMarginBottom">1dp</dimen>
-
-
 </resources>

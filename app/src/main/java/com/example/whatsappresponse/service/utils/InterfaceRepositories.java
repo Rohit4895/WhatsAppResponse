@@ -25,4 +25,10 @@ public class InterfaceRepositories {
         void addReplyMessage();
         void deleteReplyMessage(int id);
     }
+
+    public interface CallBackTextWatcher {
+
+        void callback(int position, String message);
+    }
+
 }
